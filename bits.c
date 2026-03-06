@@ -190,7 +190,7 @@ int sign(int x) {
 
  *   Bits numbered from 0 (LSB) to 31 (MSB)
 
- *   Examples: copyBit(6,0) = 0xFFFFFFFF, copyBit(5,1) = 0x00000000
+ *   Examples: copyBit(6,0) = 0x00000000, copyBit(6,1) = 0ffffffff
 
  *   Legal ops: ! ~ & ^ | << >>
 
