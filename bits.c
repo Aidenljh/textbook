@@ -159,7 +159,7 @@ NOTES:
  *   Rating: 1
  */
 int tmin(void) {
-  return 2;
+  return 2 << 30;
 }
 /* 
  * upperBits - pads n upper bits with 1's
@@ -170,7 +170,7 @@ int tmin(void) {
  *  Rating: 1
  */
 int upperBits(int n) {
-  return 2;
+  return ~0 << (32 + (~n) +1 );
 }
 // Rating 2
 /* 
@@ -182,7 +182,7 @@ int upperBits(int n) {
  *  Rating: 2
  */
 int sign(int x) {
-    return 2;
+    return (x >> 31) | (!!x);
 }
 /* 
 
@@ -190,7 +190,7 @@ int sign(int x) {
 
  *   Bits numbered from 0 (LSB) to 31 (MSB)
 
- *   Examples: copyBit(6,0) = 0x00000000, copyBit(6,1) = 0ffffffff
+ *   Examples: copyBit(6,0) = 0x00000000, copyBit(6,1) = 0xffffffff
 
  *   Legal ops: ! ~ & ^ | << >>
 
