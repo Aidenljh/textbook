@@ -200,7 +200,7 @@ int sign(int x) {
 
  */
 int copyBit(int x, int n) {
-  return 2;
+  return ((x >> n) << 31) >> 31;
 }
 /* 
  * fitsBits - return 1 if x can be represented as an 
@@ -212,7 +212,7 @@ int copyBit(int x, int n) {
  *   Rating: 2
  */
 int fitsBits(int x, int n) {
-  return 2;
+  return ! (x ^ (x << (32 + (~n) + 1) >> (32 + (~n) + 1)));
 }
 /* 
  * anyOddBit - return 1 if any odd-numbered bit in word set to 1
@@ -223,7 +223,7 @@ int fitsBits(int x, int n) {
  *   Rating: 2
  */
 int anyOddBit(int x) {
-    return 2;
+    return !! (x & 0xAAAAAAAA);
 }
 /*
  * distinctNegation - returns 1 if x != -x.
@@ -233,7 +233,7 @@ int anyOddBit(int x) {
  *   Rating: 2
  */
 int distinctNegation(int x) {
-  return 2;
+  return !!(x ^ (~x + 1));
 }
 // Rating 3
 /* 
@@ -244,7 +244,7 @@ int distinctNegation(int x) {
  *   Rating: 3
  */
 int isGreater(int x, int y) {
-  return 2;
+  return (!!(x ^ y)) ^ (!((x + (~y) + 1) >> 31));
 }
 /* 
  * isAbsEqual - return 1 if |x| == |y|, and 0 otherwise 
@@ -254,7 +254,7 @@ int isGreater(int x, int y) {
  *   Rating: 3
  */
 int isAbsEqual(int x, int y) {
-    return 2;
+    return (!(x ^ y)) ^ (!(x + y));
 }
 // Rating 4
 /* howManyBits - return the minimum number of bits required to represent x in
