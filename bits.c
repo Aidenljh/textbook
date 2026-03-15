@@ -270,5 +270,18 @@ int isAbsEqual(int x, int y) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  return 0;
+	
+	int y = x ^ (x >> 31);
+	int move1 = x >> 16;
+	int sig1 = (! move1) << 31;
+	int move2 = x >> (16 + (sig1 ^ 8) + (! move1));
+	int sig2 = (! move2) << 31;
+	int move3 = x >> (16 + (sig1 ^ 8) + (! move1) + (sig2 ^ 4) + (! move2));
+	int sig3 = (! move3) << 31;
+	int move4 = x >> (16 + (sig1 ^ 8) + (! move1) + (sig2 ^ 4) + (! move2) + (sig3 ^ 2) + (! move3));
+	int sig4 = (! move4) << 31;
+	int move5 = x >> (16 + (sig1 ^ 8) + (! move1) + (sig2 ^ 4) + (! move2) + (sig3 ^ 2) + (! move3) + (sig4 ^ 1) + (! move4));
+	int num = (16 + (sig1 ^ 8) + (! move1) + (sig2 ^ 4) + (! move2) + (sig3 ^ 2) + (! move3) + (sig4 ^ 1) + (! move4));
+	int result = num + move5 + (!!y);
+	return result;
 }
